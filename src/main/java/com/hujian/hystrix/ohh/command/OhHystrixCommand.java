@@ -66,6 +66,9 @@ public class OhHystrixCommand extends AbstractHystrixCommand<String> {
         HystrixCommandConfig hystrixCommandConfig = new HystrixCommandConfig();
         hystrixCommandConfig.setGroupKey("oh-hystrix");
 
+        //设置使用线程隔离时调用超时时间（ms）
+        hystrixCommandConfig.setExecutionIsolationThreadTimeoutInMilliseconds(2000L);
+
         //sync test
         String value = new OhHystrixCommand(hystrixCommandConfig,"hujian").execute();
         System.out.println(value);
@@ -76,7 +79,7 @@ public class OhHystrixCommand extends AbstractHystrixCommand<String> {
         Future<String> avf = new OhHystrixCommand(hystrixCommandConfig, "hujian").queue();
         String av = avf.get();
         System.out.println(av);
-        Future<String> avf1 = new OhHystrixCommand(hystrixCommandConfig,"hujian", 1000).queue();
+        Future<String> avf1 = new OhHystrixCommand(hystrixCommandConfig,"hujian", 3000).queue();
         String av1 = avf1.get();
         System.out.print(av1);
 
