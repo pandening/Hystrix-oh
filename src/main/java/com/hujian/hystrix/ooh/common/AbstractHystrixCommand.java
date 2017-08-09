@@ -7,7 +7,6 @@ import com.netflix.hystrix.HystrixCommand;
  */
 public abstract class AbstractHystrixCommand<T> extends HystrixCommand<T> {
 
-    //你可以再次编辑该配置，通过get方法获取到hystrixSetter属性之后就可以自行再次编辑
     private HystrixCommandConfig hystrixCommandConfig;
 
     public AbstractHystrixCommand(HystrixCommandConfig hystrixCommandConfig) {
