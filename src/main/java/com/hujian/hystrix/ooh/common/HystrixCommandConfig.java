@@ -5,6 +5,7 @@ import com.netflix.hystrix.HystrixCommand.Setter;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.HystrixCommandProperties;
+import com.netflix.hystrix.HystrixObservableCommand;
 import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
 
@@ -36,6 +37,18 @@ public class HystrixCommandConfig  {
     private Boolean isRequestCacheEnabled; // default : true -
 
     private Setter hystrixSetter;
+
+
+    /**
+     * convert hystrix command setter to Observable command setter
+     * @return
+     */
+    public HystrixObservableCommand.Setter convertToObservableCommandSetter() {
+        HystrixObservableCommand.Setter setter =
+                HystrixObservableCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(GroupKey))
+                .andCommandKey(HystrixCommandKey.Factory.asKey(CommandKey));
+        return setter;
+    }
 
     /**
      * stupid initializer
