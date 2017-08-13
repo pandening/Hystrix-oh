@@ -31,4 +31,11 @@ public abstract class AbstractHystrixObservableCommand<T> extends HystrixObserva
     protected abstract Observable<T> run();
     protected abstract Observable<T> fallback();
 
+    public String getGroupKey() {
+        return groupKey;
+    }
+
+    public void setGroupKey(String groupKey) {
+        this.groupKey = groupKey;
+    }
 }
